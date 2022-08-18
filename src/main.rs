@@ -40,10 +40,10 @@ fn main() {
 // Display existing tasks
 fn list_tasks() {
     let file_data = read_to_string("db.txt").expect("Error reading from file.");
-    let tasks: Vec<&str> = file_data.split("\n").collect();
+    let tasks: Vec<&str> = file_data.trim().split("\n").collect();
 
     // Print neatly
     for (index, task) in tasks.iter().enumerate() {
-        println!("{}. {}", index, task);
+        println!("{}. {}", index + 1, task);
     }
 }
