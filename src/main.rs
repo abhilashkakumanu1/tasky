@@ -1,6 +1,5 @@
-use std::fs::{File, OpenOptions};
-use std::io;
-use std::io::Write;
+use std::fs::{read_to_string, File, OpenOptions};
+use std::io::{self, Write};
 use std::path::Path;
 
 fn main() {
@@ -33,5 +32,18 @@ fn main() {
 
         file.write_all(input.to_owned().as_bytes())
             .expect("Error writing to file.");
+
+        list_tasks();
+    }
+}
+
+// Display existing tasks
+fn list_tasks() {
+    let file_data = read_to_string("db.txt").expect("Error reading from file.");
+    let tasks: Vec<&str> = file_data.split("\n").collect();
+
+    // Print neatly
+    for (index, task) in tasks.iter().enumerate() {
+        println!("{}. {}", index, task);
     }
 }
